@@ -63,7 +63,7 @@ end
 
 # --- Phase 1 Testing Gems ---
 group :development, :test do
-  gem "rspec-rails", "~> 6.0"
+  gem "rspec-rails", "~> 8.0"
   gem "factory_bot_rails"
   gem "faker"
 end
