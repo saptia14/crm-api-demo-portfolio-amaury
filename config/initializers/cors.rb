@@ -10,13 +10,16 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # Ember.js frontend origins (Dev, Production)
-    origins ENV.fetch("CORS_ORIGINS", "http://localhost:4200,https://crm-demo.soyamaury.dev").split(",")
+    origins [
+      "http://localhost:4200",
+      "https://crm-demo.soyamaury.dev"
+    ]
 
     resource "*",
       headers: :any,
       methods: %i[get post put patch delete options head],
       expose: ["Authorization"],
+      credentials: true,
       max_age: 600
   end
 end
