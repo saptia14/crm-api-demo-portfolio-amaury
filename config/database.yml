@@ -1,0 +1,28 @@
+# PostgreSQL configuration optimized for local development
+# Docs: https://guides.rubyonrails.org/configuring.html#configuring-a-database
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  port: <%= ENV.fetch("DATABASE_PORT", 5432) %>
+  username: <%= ENV.fetch("DATABASE_USERNAME", ENV["USER"]) %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "") %>
+
+development:
+  <<: *default
+  database: crm_api_development
+
+test:
+  <<: *default
+  database: crm_api_test
+
+production:
+  <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
+  # Fallback to individual variables if DATABASE_URL is not provided
+  username: <%= ENV["CRM_DATABASE_USERNAME"] %>
+  password: <%= ENV["CRM_DATABASE_PASSWORD"] %>
+  host: <%= ENV["CRM_DATABASE_HOST"] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
