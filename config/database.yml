@@ -19,6 +19,15 @@ test:
   database: crm_api_test
 
 production:
-  <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
+  primary:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
+  queue:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
+  cache:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
